@@ -1,24 +1,45 @@
-import React from 'react'
-import black from '../assets/img/black.png'
-
+import { useEffect, useState } from 'react';
+import avatar from '../assets/img/avatar.png'
+import { BsDownload } from 'react-icons/bs';
 const Home = () => {
+
+    const [scrollPosition, setScrollPosition] = useState<number>(0);
+
+    const resumeUrl:string = 'https://drive.google.com/file/d/1e15eJ0Ujl8mSJXyJExWf031LdB_BhnH2/view?usp=drive_link';
+    
+    const handleDownload = () => {
+        window.open(resumeUrl, '_blank');
+    }
+
+    useEffect(() => {
+        const handleScroll = () => {
+            setScrollPosition(window.scrollY);
+        };
+
+        window.addEventListener('scroll', handleScroll);
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
+
     return (
-        <div className='home pt-24 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-pink-300 via-purple-300 to-indigo-400 flex flex-col'>
-            <div className='content mt-20 text-xl px-2 flex justify-center text-center h-screen'>
-                <div className="name space-y-2 font-extrabold">
-                    <p className='space-y-4'>Hello, </p>
+        <div className='home scrolling-text font-roboto font-medium bg-[#0f0907] flex flex-col' style={{ left: `calc(100% - ${scrollPosition}px)`}}>
+            <div className='content text-xl px-2 flex flex-col justify-center items-center text-center h-screen'>
+                <div className="name space-y-4 font-extrabold">
+                    <p className='my-2 text-3xl lg:text-4xl lg:mb-4'>Xin Chao, </p>
                     <span>I'm</span>
-                    <span className='text-[2rem] text-blue-400 opacity-1'>Tanh</span>
-                    <div>
-                        <span>Fullstack Developer</span>
-                    </div>
+                    <span className='text-[1.5rem] ml-2 text-blue-400 opacity-1'>Tanh</span>
+                    <p className='text-sm font-medium'>Backend Web Developer</p>
                 </div>
-                <div className="avatar w-20 h-20 object-cover">
-                    <img src={black} alt="" />
+                <div className="avatar my-10 w-28 justify-centers">
+                    <img className=' rounded-full' src={avatar} alt="" />
                 </div>
-            </div>
-            <div>
-                <button className='px-10 py-3 bg-blue-400'>Dowload My Resume</button>
+                <div className='flex my-4 p-3 justify-between rounded-md text-black bg-blue-400 items-center' onClick={handleDownload}>
+                    <BsDownload>
+                    </BsDownload>
+                    <button className='ml-2'>My Resume</button>
+                </div>
             </div>
         </div>
     )

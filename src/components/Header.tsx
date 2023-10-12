@@ -1,12 +1,13 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import '../index.css'
 
 const Header = () => {
     const [active, setActive] = useState('home');
     return (
-        <header className='header relative z-[999]'>
-            <nav className='navbar w-full text-xl font-bold top-0 left-1/2 h-[3.5rem] lg:h-[4rerm]  lg:rounded-3xl flex items-center 
-            justify-around fixed sm:top-2 sm:w-[36rem] shadow-sm sm:bg-[#2c2a2a]'>
+        <header className='header ml-5 relative z-[999]'>
+            <nav className='navbar flex items-center w-full text-base font-bold px-3 top-0 left-1/2 h-[4rem]  
+                justify-around fixed shadow-sm bg-[#0f0907] lg:w-1/2 lg:text-xl lg:rounded-3xl lg:bg-slate-900
+                lg:top-4'>
                 <a className={active === 'home' ? 'active' : ''} href="#" onClick={() => setActive('home')}>
                     Home
                 </a>

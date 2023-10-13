@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import '../index.css'
+import '../../index.css'
 
 const Header = () => {
     const [active, setActive] = useState('home');

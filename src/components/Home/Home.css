@@ -1,0 +1,12 @@
+.home-hiden {
+    opacity: 0;
+    filter: blur(5px);
+    transform: translateX(-100%);
+    transition: all 1s;
+}
+
+.home-show {
+    opacity: 1;
+    filter: blur(0px);
+    transform: translateX(0);
+}

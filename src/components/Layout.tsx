@@ -8,6 +8,8 @@ import Home from './Home/Home';
 import { BsSun } from 'react-icons/bs';
 import { MdDarkMode } from 'react-icons/md';
 import { useState, useEffect } from 'react'; // Import useEffect
+import { useDispatch} from 'react-redux';
+import { updateScrollPosition } from '../redux/actions/scrollAction';
 
 const Layout = () => {
     const [theme, setTheme] = useState<string>(localStorage.getItem('theme') || 'dark');
@@ -17,6 +19,13 @@ const Layout = () => {
     useEffect(() => {
         localStorage.setItem('theme', theme);
     }, [theme]);
+
+    //scroll
+    const dispatch = useDispatch();
+    window.onscroll = () => {
+        const scrollPosition = window.scrollY;
+        dispatch(updateScrollPosition(scrollPosition));
+    };
 
     return (
         <div className={themeClassName}>

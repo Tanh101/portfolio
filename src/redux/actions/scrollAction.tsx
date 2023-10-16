@@ -1,12 +1,13 @@
-export interface ScrollAction {
-    type: string,
-    payload: string
-}
-
-const scrollDown = (navLink: string) => {
+export const updateScrollPosition = (scrollPosition: number) => {
     return {
-        type: 'SCROLL',
-        payload: navLink
-    }
-}
-export default scrollDown;
+        type: 'UPDATE_SCROLL_POSITION',
+        payload: scrollPosition,
+    };
+};
+
+export const setActiveNavLink = (navLink: string) => {
+    return {
+        type: 'SET_ACTIVE_NAV_LINK',
+        payload: navLink,
+    };
+};

@@ -1,6 +1,5 @@
 interface AppState {
-    theme: string;
-    scroll: string;
+    scrollPosition: number;
 }
 
 export default AppState;

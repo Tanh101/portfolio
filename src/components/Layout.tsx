@@ -1,25 +1,22 @@
-import Header from './Header/Header'
-import About from './About/About'
-import Project from './Projects/Project'
-import Skills from './Skills/Skills'
-import Contact from './Contact/Contact'
-import Footer from './Footer'
-import Home from './Home/Home'
-import { BsSun } from 'react-icons/bs'
-import { MdDarkMode } from 'react-icons/md'
-import { useSelector, useDispatch } from 'react-redux'
-import { darkTheme, lightTheme } from '../redux/actions/themeAction'
-import AppState from '../types'
+import Header from './Header/Header';
+import About from './About/About';
+import Project from './Projects/Project';
+import Skills from './Skills/Skills';
+import Contact from './Contact/Contact';
+import Footer from './Footer';
+import Home from './Home/Home';
+import { BsSun } from 'react-icons/bs';
+import { MdDarkMode } from 'react-icons/md';
+import { useState, useEffect } from 'react'; // Import useEffect
 
 const Layout = () => {
+    const [theme, setTheme] = useState<string>(localStorage.getItem('theme') || 'dark');
 
-    const theme = useSelector((state: AppState) => state.theme);
-    const dispatch = useDispatch();
     const themeClassName = theme === 'dark' ? 'change-theme dark font-roboto' : 'change-theme light font-roboto';
 
-    const handleChangeTheme = () => {
-        theme === 'dark' ? dispatch(lightTheme("light")) : dispatch(darkTheme("dark"));
-    }
+    useEffect(() => {
+        localStorage.setItem('theme', theme);
+    }, [theme]);
 
     return (
         <div className={themeClassName}>
@@ -30,14 +27,16 @@ const Layout = () => {
             <Skills />
             <Contact />
             <Footer />
-            <button className="border text-xl flex justify-center items-center hover:scale-110 
+            <button className={`${theme === 'dark' ? '' : 'border-gray-500'} border text-xl flex justify-center items-center hover:scale-110 
             change-theme fixed z-[999] ease-in duration-200 p-1 rounded-full w-12 h-12  bottom-4
-             right-4"
-                onClick={handleChangeTheme}>
-                {theme === 'dark' ? <BsSun></BsSun> : <MdDarkMode></MdDarkMode>}
+             right-4`}
+                onClick={() => {
+                    setTheme(theme === 'dark' ? 'light' : 'dark');
+                }}>
+                {theme === 'dark' ? <BsSun /> : <MdDarkMode />}
             </button>
         </div>
-    )
-}
+    );
+};
 
-export default Layout
+export default Layout;

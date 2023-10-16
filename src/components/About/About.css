@@ -1,0 +1,4 @@
+.active-navbar {
+    transition: 0.2s, linear;
+    color: #BAD2FF;
+}
